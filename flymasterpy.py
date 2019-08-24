@@ -1,7 +1,12 @@
 import datetime as dt
 import re
+import tkinter as tk
 from pathlib import Path
-from typing import List, NamedTuple, Tuple
+from tkinter import filedialog
+from typing import List, NamedTuple, Union, Tuple
+
+import click
+import pandas as pd
 
 
 class TrackEntry(NamedTuple):
@@ -82,6 +87,16 @@ class FlymasterLog:
 
         return TrackEntry(log_dt, latitude, longitude, fix_validity, press_alt, gps_alt)
 
+    def to_excel(self):
+        """Export track log to *.xlsx."""
+        start_time = self.track[0].timestamp
+        track_df = pd.DataFrame(self.track)
+        track_df["time"] = track_df["timestamp"].apply(self._normalize_timestamp, args=[start_time])
+        track_df.set_index("time", inplace=True)
+
+        out_filepath = self.filepath.with_suffix(".xlsx")
+        track_df.to_excel(out_filepath)
+
     @staticmethod
     def date_from_filename(filepath: Path) -> Tuple[dt.date, str]:
         """
@@ -98,3 +113,49 @@ class FlymasterLog:
         )
 
         return log_date, date_segment
+
+    @staticmethod
+    def _normalize_timestamp(timestamp: dt.datetime, start_time: dt.datetime) -> float:
+        """Normalize timestamp to time since the log begain."""
+        delta = timestamp - start_time
+        return delta.total_seconds()
+
+
+def processing_pipeline(data_dir: Path):
+    """
+    Recursively iterate over all *.igc files in the top-level directory and export to *.xlsx.
+
+    Note: *.igc files with an exactly named *.xlsx partner in the same directory are ignored.
+    """
+    for log_file in data_dir.rglob("*.igc"):
+        # Check for existing conversion
+        file_as_xlsx = log_file.with_suffix(".xlsx")
+        if file_as_xlsx.exists():
+            continue
+        else:
+            FlymasterLog(log_file).to_excel()
+
+
+@click.command()
+@click.option("-d", "--datadir", default=None, help="Top level data directory")
+def cli(datadir: Union[str, None]):
+    """
+    CLI Userflow.
+
+    If no `datadir` is explicitly specified, the user is prompted to select the top-level data
+    directory.
+    """
+    if not datadir:
+        # Generate a Tk file selection dialog to select the top level data dir if none is provided
+        # to the CLI
+        root = tk.Tk()
+        root.withdraw()
+        datadir = Path(filedialog.askdirectory(title="Select Data Directory"))
+    else:
+        datadir = Path(datadir)
+
+    processing_pipeline(datadir)
+
+
+if __name__ == "__main__":
+    cli()

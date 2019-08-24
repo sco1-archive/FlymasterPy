@@ -6,6 +6,9 @@ authors = ["S. Co1 <sco1.git@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
+click = "^7.0"
+pandas = "^0.25"
+openpyxl = "^2.6"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^3.7"
