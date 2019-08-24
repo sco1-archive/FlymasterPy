@@ -51,7 +51,7 @@ version = "2.0.1"
 six = "*"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Composable command line interface toolkit"
 name = "click"
 optional = false
@@ -65,6 +65,14 @@ name = "entrypoints"
 optional = false
 python-versions = ">=2.7"
 version = "0.3"
+
+[[package]]
+category = "main"
+description = "An implementation of lxml.xmlfile for the standard library"
+name = "et-xmlfile"
+optional = false
+python-versions = "*"
+version = "1.0.1"
 
 [[package]]
 category = "dev"
@@ -124,6 +132,14 @@ version = "0.19"
 zipp = ">=0.5"
 
 [[package]]
+category = "main"
+description = "Julian dates from proleptic Gregorian and Julian calendars."
+name = "jdcal"
+optional = false
+python-versions = "*"
+version = "1.4.1"
+
+[[package]]
 category = "dev"
 description = "McCabe checker, plugin for flake8"
 name = "mccabe"
@@ -138,6 +154,39 @@ name = "nodeenv"
 optional = false
 python-versions = "*"
 version = "1.3.3"
+
+[[package]]
+category = "main"
+description = "NumPy is the fundamental package for array computing with Python."
+name = "numpy"
+optional = false
+python-versions = ">=3.5"
+version = "1.17.0"
+
+[[package]]
+category = "main"
+description = "A Python library to read/write Excel 2010 xlsx/xlsm files"
+name = "openpyxl"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+version = "2.6.3"
+
+[package.dependencies]
+et_xmlfile = "*"
+jdcal = "*"
+
+[[package]]
+category = "main"
+description = "Powerful data structures for data analysis, time series, and statistics"
+name = "pandas"
+optional = false
+python-versions = ">=3.5.3"
+version = "0.25.1"
+
+[package.dependencies]
+numpy = ">=1.13.3"
+python-dateutil = ">=2.6.1"
+pytz = ">=2017.2"
 
 [[package]]
 category = "dev"
@@ -186,6 +235,25 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "2.1.1"
 
 [[package]]
+category = "main"
+description = "Extensions to the standard Python datetime module"
+name = "python-dateutil"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
+version = "2.8.0"
+
+[package.dependencies]
+six = ">=1.5"
+
+[[package]]
+category = "main"
+description = "World timezone definitions, modern and historical"
+name = "pytz"
+optional = false
+python-versions = "*"
+version = "2019.2"
+
+[[package]]
 category = "dev"
 description = "YAML parser and emitter for Python"
 name = "pyyaml"
@@ -194,7 +262,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "5.1.2"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Python 2 and 3 compatibility utilities"
 name = "six"
 optional = false
@@ -234,7 +302,7 @@ python-versions = ">=2.7"
 version = "0.5.2"
 
 [metadata]
-content-hash = "a2530bef709cd7d0be4c30e50c5e7b13238f9368986331a57b771f24a20287c4"
+content-hash = "c7a60bdcb904e6c366a9c17661fe3cd676479cf4f4eca0ded2a077793e520197"
 python-versions = "^3.7"
 
 [metadata.hashes]
@@ -245,17 +313,24 @@ black = ["09a9dcb7c46ed496a9850b76e4e825d6049ecd38b611f1224857a79bd985a8cf", "68
 cfgv = ["edb387943b665bf9c434f717bf630fa78aecd53d5900d2e05da6ad6048553144", "fbd93c9ab0a523bf7daec408f3be2ed99a980e20b2d19b50fc184ca6b820d289"]
 click = ["2335065e6395b9e67ca716de5f7526736bfa6ceead690adf616d925bdc622b13", "5b94b49521f6456670fdb30cd82a4eca9412788a93fa6dd6df72c94d5a8ff2d7"]
 entrypoints = ["589f874b313739ad35be6e0cd7efde2a4e9b6fea91edcc34e58ecbb8dbe56d19", "c70dd71abe5a8c85e55e12c19bd91ccfeec11a6e99044204511f9ed547d48451"]
+et-xmlfile = ["614d9722d572f6246302c4491846d2c393c199cfa4edc9af593437691683335b"]
 flake8 = ["19241c1cbc971b9962473e4438a2ca19749a7dd002dd1a946eaba171b4114548", "8e9dfa3cecb2400b3738a42c54c3043e821682b9c840b0448c0503f781130696"]
 flake8-docstrings = ["3ad372b641f4c8e70c7465f067aed4ff8bf1e9347fce14f9eb71ed816db36257", "d8d72ccd5807c1ab9ff1466cb9bece0c4d94b8669e9bc4f472abc80dbc5d399e"]
 flake8-polyfill = ["12be6a34ee3ab795b19ca73505e7b55826d5f6ad7230d31b18e106400169b9e9", "e44b087597f6da52ec6393a709e7108b2905317d0c0b744cdca6208e670d8eda"]
 identify = ["9aba2d08a82aa8e6f58810d4887ed3cf103a1befeb1eaf632d9c6fd2d6642542", "b50ffad180b3a93b33a58b42597ef22493240d406ba07cc5058daf70f44b8d7c"]
 importlib-metadata = ["23d3d873e008a513952355379d93cbcab874c58f4f034ff657c7a87422fa64e8", "80d2de76188eabfbfcf27e6a37342c2827801e59c4cc14b0371c56fed43820e3"]
+jdcal = ["1abf1305fce18b4e8aa248cf8fe0c56ce2032392bc64bbd61b5dff2a19ec8bba", "472872e096eb8df219c23f2689fc336668bdb43d194094b5cc1707e1640acfc8"]
 mccabe = ["ab8a6258860da4b6677da4bd2fe5dc2c659cff31b3ee4f7f5d64e79735b80d42", "dd8d182285a0fe56bace7f45b5e7d1a6ebcbf524e8f3bd87eb0f125271b8831f"]
 nodeenv = ["ad8259494cf1c9034539f6cced78a1da4840a4b157e23640bc4a0c0546b0cb7a"]
+numpy = ["03e311b0a4c9f5755da7d52161280c6a78406c7be5c5cc7facfbcebb641efb7e", "0cdd229a53d2720d21175012ab0599665f8c9588b3b8ffa6095dd7b90f0691dd", "312bb18e95218bedc3563f26fcc9c1c6bfaaf9d453d15942c0839acdd7e4c473", "464b1c48baf49e8505b1bb754c47a013d2c305c5b14269b5c85ea0625b6a988a", "5adfde7bd3ee4864536e230bcab1c673f866736698724d5d28c11a4d63672658", "7724e9e31ee72389d522b88c0d4201f24edc34277999701ccd4a5392e7d8af61", "8d36f7c53ae741e23f54793ffefb2912340b800476eb0a831c6eb602e204c5c4", "910d2272403c2ea8a52d9159827dc9f7c27fb4b263749dca884e2e4a8af3b302", "951fefe2fb73f84c620bec4e001e80a80ddaa1b84dce244ded7f1e0cbe0ed34a", "9588c6b4157f493edeb9378788dcd02cb9e6a6aeaa518b511a1c79d06cbd8094", "9ce8300950f2f1d29d0e49c28ebfff0d2f1e2a7444830fbb0b913c7c08f31511", "be39cca66cc6806652da97103605c7b65ee4442c638f04ff064a7efd9a81d50a", "c3ab2d835b95ccb59d11dfcd56eb0480daea57cdf95d686d22eff35584bc4554", "eb0fc4a492cb896346c9e2c7a22eae3e766d407df3eb20f4ce027f23f76e4c54", "ec0c56eae6cee6299f41e780a0280318a93db519bbb2906103c43f3e2be1206c", "f4e4612de60a4f1c4d06c8c2857cdcb2b8b5289189a12053f37d3f41f06c60d0"]
+openpyxl = ["72d1ed243972cad0b3c236230083cac00d9c72804e64a2ae93d7901aec1a8f1c"]
+pandas = ["18d91a9199d1dfaa01ad645f7540370ba630bdcef09daaf9edf45b4b1bca0232", "3f26e5da310a0c0b83ea50da1fd397de2640b02b424aa69be7e0784228f656c9", "4182e32f4456d2c64619e97c58571fa5ca0993d1e8c2d9ca44916185e1726e15", "426e590e2eb0e60f765271d668a30cf38b582eaae5ec9b31229c8c3c10c5bc21", "5eb934a8f0dc358f0e0cdf314072286bbac74e4c124b64371395e94644d5d919", "717928808043d3ea55b9bcde636d4a52d2236c246f6df464163a66ff59980ad8", "8145f97c5ed71827a6ec98ceaef35afed1377e2d19c4078f324d209ff253ecb5", "8744c84c914dcc59cbbb2943b32b7664df1039d99e834e1034a3372acb89ea4d", "c1ac1d9590d0c9314ebf01591bd40d4c03d710bfc84a3889e5263c97d7891dee", "cb2e197b7b0687becb026b84d3c242482f20cbb29a9981e43604eb67576da9f6", "d4001b71ad2c9b84ff18b182cea22b7b6cbf624216da3ea06fb7af28d1f93165", "d8930772adccb2882989ab1493fa74bd87d47c8ac7417f5dd3dd834ba8c24dc9", "dfbb0173ee2399bc4ed3caf2d236e5c0092f948aafd0a15fbe4a0e77ee61a958", "eebfbba048f4fa8ac711b22c78516e16ff8117d05a580e7eeef6b0c2be554c18", "f1b21bc5cf3dbea53d33615d1ead892dfdae9d7052fa8898083bec88be20dcd2"]
 pre-commit = ["21ce389ea3a480170804208baff8ceaac815ecf6b9bd6c6797de5584ad69cff8", "3b0e901f442b966444833f1924e9bf9a7c10c79741b21520f68bc87639220f5e"]
 pycodestyle = ["95a2219d12372f05704562a14ec30bc76b05a5b297b21a5dfe3f6fac3491ae56", "e40a936c9a450ad81df37f549d676d127b1b66000a6c500caa2b085bc0ca976c"]
 pydocstyle = ["04c84e034ebb56eb6396c820442b8c4499ac5eb94a3bda88951ac3dc519b6058", "66aff87ffe34b1e49bff2dd03a88ce6843be2f3346b0c9814410d34987fbab59"]
 pyflakes = ["17dbeb2e3f4d772725c777fabc446d5634d1038f234e77343108ce445ea69ce0", "d976835886f8c5b31d47970ed689944a0262b5f3afa00a5a7b4dc81e5449f8a2"]
+python-dateutil = ["7e6584c74aeed623791615e26efd690f29817a27c73085b78e4bad02493df2fb", "c89805f6f4d64db21ed966fda138f8a5ed7a4fdbc1a8ee329ce1b74e3c74da9e"]
+pytz = ["26c0b32e437e54a18161324a2fca3c4b9846b74a8dccddd843113109e1116b32", "c894d57500a4cd2d5c71114aaab77dbab5eabd9022308ce5ac9bb93a60a6f0c7"]
 pyyaml = ["0113bc0ec2ad727182326b61326afa3d1d8280ae1122493553fd6f4397f33df9", "01adf0b6c6f61bd11af6e10ca52b7d4057dd0be0343eb9283c878cf3af56aee4", "5124373960b0b3f4aa7df1707e63e9f109b5263eca5976c66e08b1c552d4eaf8", "5ca4f10adbddae56d824b2c09668e91219bb178a1eee1faa56af6f99f11bf696", "7907be34ffa3c5a32b60b95f4d95ea25361c951383a894fec31be7252b2b6f34", "7ec9b2a4ed5cad025c2278a1e6a19c011c80a3caaac804fd2d329e9cc2c287c9", "87ae4c829bb25b9fe99cf71fbb2140c448f534e24c998cc60f39ae4f94396a73", "9de9919becc9cc2ff03637872a440195ac4241c80536632fffeb6a1e25a74299", "a5a85b10e450c66b49f98846937e8cfca1db3127a9d5d1e31ca45c3d0bef4c5b", "b0997827b4f6a7c286c01c5f60384d218dca4ed7d9efa945c3e1aa623d5709ae", "b631ef96d3222e62861443cc89d6563ba3eeb816eeb96b2629345ab795e53681", "bf47c0607522fdbca6c9e817a6e81b08491de50f3766a7a0e6a5be7905961b41", "f81025eddd0327c7d4cfe9b62cf33190e1e736cc6e97502b3ec425f574b3e7a8"]
 six = ["3350809f0555b11f552448330d0b52d5f24c91a322ea4a15ef22629740f3761c", "d16a0141ec1a18405cd4ce8b4613101da75da0e9a7aec5bdd4fa804d0e0eba73"]
 snowballstemmer = ["9f3b9ffe0809d174f7047e121431acf99c89a7040f0ca84f94ba53a498e6d0c9"]
