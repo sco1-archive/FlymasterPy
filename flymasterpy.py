@@ -3,7 +3,7 @@ import re
 import tkinter as tk
 from pathlib import Path
 from tkinter import filedialog
-from typing import List, NamedTuple, Union, Tuple
+from typing import List, NamedTuple, Tuple, Union
 
 import click
 import pandas as pd
@@ -74,7 +74,7 @@ class FlymasterLog:
         )
         log_groups = re.findall(exp, log_entry)[0]
 
-        time_exp = "%y%m%d%H%M%S"
+        time_exp = r"%y%m%d%H%M%S"
         full_timestamp = f"{self._log_date_str}{log_groups[0]}"
         log_dt = dt.datetime.strptime(full_timestamp, time_exp)
 
@@ -102,15 +102,24 @@ class FlymasterLog:
         """
         Parse the date from the Flymaster log's filename.
 
-        Log file name is assumed to be named according to IGC Specification:
-            YYMMDD??????.igc
+        Log file name is assumed to be named one of two ways:
+            * According to IGC Specification: `yymmdd??????.igc`
+            * According to the GPSDump 5.0 naming scheme: `YYYY-mm-dd-HH-MM-SS.igc`
 
-        Optionaly return the raw log date string
+        Optionaly return the raw log date string (as `yymmdd`)
         """
-        date_segment = filepath.stem[:6]
-        log_date = dt.date.fromisoformat(
-            f"20{date_segment[:2]}-{date_segment[2:4]}-{date_segment[4:6]}"
-        )
+        # Since there's only 2 options, it's good enough for now to just try one and fall back to
+        # the other
+        try:
+            # IGC standard naming
+            date_segment = filepath.stem[:6]
+            log_date = dt.date.fromisoformat(
+                f"20{date_segment[:2]}-{date_segment[2:4]}-{date_segment[4:6]}"
+            )
+        except ValueError:
+            # GPSDump naming
+            log_date = dt.date.fromisoformat(filepath.stem[:10])
+            date_segment = log_date.strftime(r"%y%m%d")
 
         return log_date, date_segment
 
